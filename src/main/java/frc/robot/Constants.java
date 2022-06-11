@@ -10,14 +10,20 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    // constants for drivetrain
+
+    /**
+     * Constants for drivetrain
+     */
     public static final class DrivetrainConstants {
         public static final int FRONTLEFTMOTORID = 2;
         public static final int FRONTRIGHTMOTORID = 1;
         public static final int BACKLEFTMOTORID = 3;
         public static final int BACKRIGHTMOTORID = 4;
     }
-    // constants for the arm
+
+    /**
+     * Constants for the Pnuematic Systems
+     */
     public static final class PneumaticsConstants {
         public static final int FORWARDCHANNEL = 3;
         public static final int REVERSECHANNEL = 4;

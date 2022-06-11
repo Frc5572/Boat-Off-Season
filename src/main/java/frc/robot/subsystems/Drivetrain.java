@@ -16,7 +16,9 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-
+/**
+ * Drivetrain Subsystem
+ */
 public class Drivetrain extends SubsystemBase {
     /** Creates a new ExampleSubsystem. */
     MotorController m_frontLeft;
@@ -30,7 +32,9 @@ public class Drivetrain extends SubsystemBase {
     public DoubleSolenoid mecanum;
     public boolean mecanumState = false;
 
-
+    /**
+     * Drivetrain Subsystem
+     */
     public Drivetrain() {
         mecanum = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
             Constants.PneumaticsConstants.FORWARDCHANNEL,
@@ -63,6 +67,13 @@ public class Drivetrain extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
+    /**
+     * Default drive function
+     *
+     * @param yaxis Y-Axis power
+     * @param xaxis X-Axis Power
+     * @param rotation Rotation Power
+     */
     public void drive(double yaxis, double xaxis, double rotation) {
         // if(mecanumState) {
         // tankDrive.tankDrive(left, right);

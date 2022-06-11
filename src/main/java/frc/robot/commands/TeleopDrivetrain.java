@@ -18,7 +18,8 @@ public class TeleopDrivetrain extends CommandBase {
     /**
      * Creates a new ExampleCommand.
      *
-     * @param subsystem The subsystem used by this command.
+     * @param drivetrain The drive train subsystem used by this command.
+     * @param driver Driver Xbox Controller
      */
     public TeleopDrivetrain(Drivetrain drivetrain, XboxController driver) {
         this.drivetrain = drivetrain;
