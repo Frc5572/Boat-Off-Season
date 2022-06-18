@@ -57,7 +57,7 @@ public class Drivetrain extends SubsystemBase {
 
         mecanum.set(Value.kForward);
 
-        // tankDrive = new DifferentialDrive(m_left, m_right);
+        tankDrive = new DifferentialDrive(m_left, m_right);
         mecanumDrive = new MecanumDrive(m_frontLeft, m_rearLeft, m_frontRight, m_rearRight);
 
     }
@@ -68,18 +68,24 @@ public class Drivetrain extends SubsystemBase {
     }
 
     /**
-     * Default drive function
+     * Tank drive function
+     *
+     * @param left left power
+     * @param right right Power
+     */
+    public void driveTank(double left, double right) {
+        tankDrive.tankDrive(left, right);
+    }
+
+    /**
+     * Mecanum drive function
      *
      * @param yaxis Y-Axis power
      * @param xaxis X-Axis Power
      * @param rotation Rotation Power
      */
-    public void drive(double yaxis, double xaxis, double rotation) {
-        // if(mecanumState) {
-        // tankDrive.tankDrive(left, right);
-        // } else {
+    public void driveMecanum(double yaxis, double xaxis, double rotation) {
         mecanumDrive.driveCartesian(yaxis, xaxis, rotation);
-        // }
     }
 
     @Override
