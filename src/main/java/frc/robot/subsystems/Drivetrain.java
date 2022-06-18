@@ -51,7 +51,7 @@ public class Drivetrain extends SubsystemBase {
             new CANSparkMax(Constants.DrivetrainConstants.BACKRIGHTMOTORID, MotorType.kBrushless);
         m_right = new MotorControllerGroup(m_frontRight, m_rearRight);
 
-        // m_right.setInverted(true);
+        m_right.setInverted(true);
         m_rearRight.setInverted(true);
         m_frontRight.setInverted(true);
 
