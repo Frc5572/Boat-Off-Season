@@ -5,13 +5,13 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -21,11 +21,11 @@ import frc.robot.Constants;
  */
 public class Drivetrain extends SubsystemBase {
     /** Creates a new ExampleSubsystem. */
-    MotorController m_frontLeft;
-    MotorController m_rearLeft;
+    CANSparkMax m_frontLeft;
+    CANSparkMax m_rearLeft;
     MotorControllerGroup m_left;
-    MotorController m_frontRight;
-    MotorController m_rearRight;
+    CANSparkMax m_frontRight;
+    CANSparkMax m_rearRight;
     MotorControllerGroup m_right;
     DifferentialDrive tankDrive;
     MecanumDrive mecanumDrive;
@@ -51,7 +51,10 @@ public class Drivetrain extends SubsystemBase {
             new CANSparkMax(Constants.DrivetrainConstants.BACKRIGHTMOTORID, MotorType.kBrushless);
         m_right = new MotorControllerGroup(m_frontRight, m_rearRight);
 
-        m_right.setInverted(true);
+        m_frontLeft.setIdleMode(IdleMode.kBrake);
+        m_rearLeft.setIdleMode(IdleMode.kBrake);
+        m_frontRight.setIdleMode(IdleMode.kBrake);
+        m_rearRight.setIdleMode(IdleMode.kBrake);
         m_rearRight.setInverted(true);
         m_frontRight.setInverted(true);
 
