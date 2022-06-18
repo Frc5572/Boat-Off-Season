@@ -7,7 +7,6 @@ import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
-import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
@@ -23,11 +22,11 @@ public class autoTest extends SequentialCommandGroup {
         // PathPlannerTrajectory autoTest = PathPlanner.loadPath("autoTest", 6, 3);
         // PPMecanumControllerCommand command = baseMecanumCommand(autoTest);
         // PathPlannerState intialstate = autoTest.getInitialState();
-        var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(
-            new SimpleMotorFeedforward(Constants.DrivetrainConstants.ksVolts,
-                Constants.DrivetrainConstants.kvVoltSecondsPerMeter,
-                Constants.DrivetrainConstants.kaVoltSecondsSquaredPerMeter),
-            Constants.DrivetrainConstants.kDriveKinematics, 10);
+        // var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(
+        // new SimpleMotorFeedforward(Constants.DrivetrainConstants.ksVolts,
+        // Constants.DrivetrainConstants.kvVoltSecondsPerMeter,
+        // Constants.DrivetrainConstants.kaVoltSecondsSquaredPerMeter),
+        // Constants.DrivetrainConstants.kDriveKinematics, 10);
 
         try {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath()

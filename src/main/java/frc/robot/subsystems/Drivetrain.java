@@ -41,15 +41,19 @@ public class Drivetrain extends SubsystemBase {
     public boolean mecanumState = false;
     public DifferentialDriveOdometry differentialDriveOdometry;
     public AHRS gyro;
+    public RelativeEncoder encoder =
+        m_frontLeft.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
+    public RelativeEncoder encoder2 =
+        m_frontRight.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
 
     /**
      * Drivetrain Subsystem
      */
     public Drivetrain() {
         gyro = new AHRS(Port.kMXP);
+        zeroGyro();
         differentialDriveOdometry = new DifferentialDriveOdometry(getYaw());
-        RelativeEncoder encoder =
-            m_frontLeft.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
+
         mecanum = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
             Constants.PneumaticsConstants.FORWARDCHANNEL,
             Constants.PneumaticsConstants.REVERSECHANNEL);
@@ -95,6 +99,7 @@ public class Drivetrain extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        differentialDriveOdometry.update(getYaw(), 0, 0);
     }
 
     /**
@@ -123,11 +128,19 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-        return new DifferentialDriveWheelSpeeds();
+        double frontleftvelocity = encoder.getVelocity();
+        double frontrightvelocity = encoder2.getVelocity();
+        double diameter = 4;
+        double circumfernce = Math.PI * diameter;
+        double leftwheelspeed = frontleftvelocity * circumfernce;
+        double rightwheelspeed = frontrightvelocity * circumfernce;
+        return new DifferentialDriveWheelSpeeds(leftwheelspeed, rightwheelspeed);
     }
 
     public void tankDriveVolts(double number, double number2) {
-
+        m_left.setVoltage(number);
+        m_right.setVoltage(number2);
+        tankDrive.feed();
     }
 
     public void resetOdometry(Pose2d pose) {
